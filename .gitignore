@@ -1,0 +1,4 @@
+.env
+*.sqlite3
+*.session
+__pycache__
