@@ -18,7 +18,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-FROM = [-1002666164924, -1002666164924, -1001271049026]
+FROM = [-1002666164924, -1002035975495, -1001271049026]
 
 TO = [-1002716122948]
 
@@ -40,7 +40,7 @@ PATTERN = (
 )
 
 
-@client.on(events.NewMessage(chats=FROM))
+@client.on(events.NewMessage(chats=FROM, forwards=False))
 async def get_post(event: events.NewMessage.Event):
     gallery = getattr(event, "messages", None)
     if event.grouped_id and not gallery:
