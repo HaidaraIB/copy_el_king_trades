@@ -66,9 +66,8 @@ async def copy_messages(
     stored_msg = None
     if not event.grouped_id:
         message: Message = event.message
-        if not (
-            (message.photo and not message.web_preview) or message.video
-        ) and re.match(PATTERN, message.text, re.MULTILINE | re.IGNORECASE):
+        m = re.match(PATTERN, message.text, re.MULTILINE | re.IGNORECASE)
+        if m:
             for channel in to:
                 if event.is_reply:
                     stored_msg = TelethonDB.get_messages(
@@ -94,9 +93,8 @@ async def edit_copied_messages(
 ):
     if not event.grouped_id:
         message: Message = event.message
-        if not (
-            (message.photo and not message.web_preview) or message.video
-        ) and re.match(PATTERN, message.text, re.MULTILINE | re.IGNORECASE):
+        m = re.match(PATTERN, message.text, re.MULTILINE | re.IGNORECASE)
+        if m:
             for channel in to:
                 stored_msg = TelethonDB.get_messages(
                     from_message_id=message.id,
